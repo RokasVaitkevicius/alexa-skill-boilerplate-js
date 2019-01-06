@@ -6,10 +6,15 @@ const HelpIntent = {
   },
   handle(handlerInput) {
     const { responseBuilder, attributesManager } = handlerInput
-    const { speech, reprompt } = attributesManager.getRequestAttributes()
+    const {
+      speech,
+      reprompt,
+      i18n,
+      SPEECH_KEYS,
+    } = attributesManager.getRequestAttributes()
 
-    speech.say('This is help intent.')
-    reprompt.say('This is help intent reprompt.')
+    speech.say(i18n(SPEECH_KEYS.defaultHelp))
+    reprompt.say(i18n(SPEECH_KEYS.defaultHelpReprompt))
 
     return responseBuilder
       .speak(speech.ssml(true))

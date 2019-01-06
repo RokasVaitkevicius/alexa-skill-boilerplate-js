@@ -7,9 +7,9 @@ const StopIntent = {
   },
   async handle(handlerInput) {
     const { responseBuilder, attributesManager } = handlerInput
-    const { speech } = attributesManager.getRequestAttributes()
+    const { speech, i18n, SPEECH_KEYS } = attributesManager.getRequestAttributes()
 
-    speech.say('This is stop intent. Goodbye.')
+    speech.say(i18n(SPEECH_KEYS.defaultStop))
 
     return responseBuilder
       .speak(speech.ssml(true))

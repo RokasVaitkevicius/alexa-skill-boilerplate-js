@@ -1,14 +1,20 @@
 const UnhandledIntent = {
   canHandle(handlerInput) {
-    return handlerInput.requestEnvelope.request.type !== 'SessionEndedRequest'
-      || handlerInput.requestEnvelope.request.intent.name === 'AMAZON.FallbackIntent'
+    const { request } = handlerInput.requestEnvelope
+    return request.intent
+      && request.intent.name === 'AMAZON.FallbackIntent'
   },
   handle(handlerInput) {
     const { responseBuilder, attributesManager } = handlerInput
-    const { speech, reprompt } = attributesManager.getRequestAttributes()
+    const {
+      speech,
+      reprompt,
+      i18n,
+      SPEECH_KEYS,
+    } = attributesManager.getRequestAttributes()
 
-    speech.say('This intent is unhandled.')
-    reprompt.say('This is unhandled intent reprompt.')
+    speech.say(i18n(SPEECH_KEYS.defaultUnhandled))
+    reprompt.say(i18n(SPEECH_KEYS.defaultUnhandledReprompt))
 
     return responseBuilder
       .speak(speech.ssml(true))

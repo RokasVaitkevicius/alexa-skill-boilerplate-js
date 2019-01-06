@@ -4,10 +4,10 @@ const ErrorHandler = {
   },
   handle(handlerInput, error) {
     const { attributesManager } = handlerInput
-    const { speech } = attributesManager.getRequestAttributes()
+    const { speech, i18n, SPEECH_KEYS } = attributesManager.getRequestAttributes()
 
-    console.log(JSON.stringify(error, null, 2))
-    speech.say('Something bad happened. Please try to restart the skill.')
+    console.log(error)
+    speech.say(i18n(SPEECH_KEYS.gracefulCrash))
 
     return handlerInput.responseBuilder
       .speak(speech.ssml(true))
