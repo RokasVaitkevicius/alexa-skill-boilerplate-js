@@ -13,7 +13,7 @@ class I18n {
     if (languages[language]) {
       this.speech = languages[language]
       if (languages[locale]) {
-        this.speech = Object.assign(this.speech, languages[locale])
+        this.speech = { ...this.speech, ...languages[locale] }
       } else {
         this.speech = languages.en
       }

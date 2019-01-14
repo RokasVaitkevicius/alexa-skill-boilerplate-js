@@ -23,7 +23,7 @@ describe('Default handler test', function () {
 
     it('will launch', async function () {
       reply = await alexa.launch()
-      assert.include(speech(reply), 'Welcome to launch intent.')
+      assert.include(speech(reply), 'This is launch intent specific to EN-GB.')
     })
   })
 })
